@@ -11,7 +11,7 @@ const products: Product[] = [
     id: 1,
     name: "Minimalist Ceramic Vase",
     price: 48.99,
-    image: "https://images.unsplash.com/photo-1612196808214-b40b3db631b1?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1581794378943-5f6f3371ae1e?auto=format&fit=crop&q=80",
     category: "Home Decor",
     description: "A beautifully crafted ceramic vase with a minimalist design that complements any interior."
   },
@@ -19,7 +19,7 @@ const products: Product[] = [
     id: 2,
     name: "Wooden Serving Tray",
     price: 34.95,
-    image: "https://images.unsplash.com/photo-1594040226829-7f251ab46d80?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&q=80",
     category: "Kitchen",
     description: "Elegant wooden serving tray made from sustainable oak with smooth finish."
   },
@@ -27,7 +27,7 @@ const products: Product[] = [
     id: 3,
     name: "Linen Throw Pillow",
     price: 29.99,
-    image: "https://images.unsplash.com/photo-1601189575328-7e4384bae25c?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80",
     category: "Textiles",
     description: "Soft linen throw pillow with removable cover in neutral tones."
   },
@@ -35,7 +35,7 @@ const products: Product[] = [
     id: 4,
     name: "Handcrafted Wall Clock",
     price: 68.50,
-    image: "https://images.unsplash.com/photo-1597624812481-24626c926cd6?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&q=80",
     category: "Wall Decor",
     description: "Modern wall clock with a clean design and silent quartz movement."
   },
@@ -43,7 +43,7 @@ const products: Product[] = [
     id: 5,
     name: "Glass Terrarium",
     price: 42.00,
-    image: "https://images.unsplash.com/photo-1545165375-68b9195c7f9c?auto=format&fit=crop&q=80", 
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80", 
     category: "Plants",
     description: "Geometric glass terrarium for displaying your favorite small plants."
   },
@@ -51,7 +51,7 @@ const products: Product[] = [
     id: 6,
     name: "Marble Coaster Set",
     price: 24.99,
-    image: "https://images.unsplash.com/photo-1532499016263-f2c3e89de9cd?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1588371847456-81f09e28491a?auto=format&fit=crop&q=80",
     category: "Tableware",
     description: "Set of four marble coasters with cork backing to protect your surfaces."
   },
@@ -59,7 +59,7 @@ const products: Product[] = [
     id: 7,
     name: "Woven Storage Basket",
     price: 39.95,
-    image: "https://images.unsplash.com/photo-1599619585752-c3d98ee25272?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1537182534312-f945134cce34?auto=format&fit=crop&q=80",
     category: "Storage",
     description: "Handwoven storage basket perfect for organizing any room in your home."
   },
@@ -67,7 +67,7 @@ const products: Product[] = [
     id: 8,
     name: "Nordic Table Lamp",
     price: 79.00,
-    image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80",
     category: "Lighting",
     description: "Scandinavian-inspired table lamp with wooden base and linen shade."
   }

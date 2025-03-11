@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -19,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4 mb-12">
           {/* Brand info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold">ZUREE</h3>
+            <h3 className="text-xl font-bold">ZUREE DISEÑO</h3>
             <p className="text-muted-foreground text-sm max-w-xs">
               A collection of thoughtfully designed objects that bring beauty and purpose to everyday life.
             </p>
@@ -117,7 +116,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="text-center pt-6 border-t border-gray-200 mt-6">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} ZUREE. All rights reserved.
+            © {currentYear} ZUREE DISEÑO. All rights reserved.
           </p>
         </div>
       </div>

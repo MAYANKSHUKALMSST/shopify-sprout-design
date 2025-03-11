@@ -50,7 +50,7 @@ const Navbar = () => {
           className="text-2xl font-semibold tracking-tight animate-fade-in"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          ZUREE
+          ZUREE DISEÑO
         </Link>
 
         {/* Desktop Navigation */}

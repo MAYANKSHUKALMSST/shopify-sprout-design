@@ -79,7 +79,7 @@ const Hero = () => {
       >
         <div className="aspect-[16/9] overflow-hidden rounded-xl">
           <img
-            src="https://images.unsplash.com/photo-1581957088953-8c910586389b?auto=format&fit=crop&q=80"
+            src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80"
             alt="Minimalist home interior"
             className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
           />
