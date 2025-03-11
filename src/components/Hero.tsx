@@ -5,9 +5,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Adding framer-motion for enhanced animations
-<lov-add-dependency>framer-motion@latest</lov-add-dependency>
-
 const Hero = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex flex-col justify-center relative overflow-hidden pt-20">
