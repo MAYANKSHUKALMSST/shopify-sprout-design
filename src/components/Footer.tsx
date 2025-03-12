@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -15,12 +16,12 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="container mx-auto px-4 py-16 md:px-6">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4 mb-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 mb-12">
           {/* Brand info */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold">ZUREE DISEÑO</h3>
             <p className="text-muted-foreground text-sm max-w-xs">
-              A collection of thoughtfully designed objects that bring beauty and purpose to everyday life.
+              A collection of thoughtfully designed clothing that brings style and comfort to everyday life.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-600 hover:text-black transition-colors">
@@ -33,40 +34,6 @@ const Footer = () => {
                 <Twitter size={18} />
               </a>
             </div>
-          </div>
-          
-          {/* Navigation */}
-          <div>
-            <h3 className="font-medium mb-4">Navigation</h3>
-            <ul className="space-y-3">
-              {['Home', 'Shop', 'Collections', 'About', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Collections */}
-          <div>
-            <h3 className="font-medium mb-4">Collections</h3>
-            <ul className="space-y-3">
-              {['Home Decor', 'Kitchen', 'Textiles', 'Lighting', 'New Arrivals'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    to={`/collections/${item.toLowerCase().replace(/\s+/g, '-')}`} 
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
           
           {/* Contact */}
