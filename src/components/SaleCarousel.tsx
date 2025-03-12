@@ -110,19 +110,19 @@ const SaleCarousel = () => {
   };
 
   return (
-    <section className="bg-black text-white py-16">
+    <section className="bg-black text-white py-8">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Tag size={18} className="text-red-400" />
-              <span className="text-red-400 font-medium">LIMITED TIME OFFER</span>
+            <div className="flex items-center gap-2 mb-1">
+              <Tag size={16} className="text-red-400" />
+              <span className="text-red-400 font-medium text-sm">LIMITED TIME OFFER</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold">Summer Sale</h2>
-            <p className="text-gray-300 mt-2">Up to 50% off on selected items</p>
+            <h2 className="text-2xl md:text-3xl font-bold">Summer Sale</h2>
+            <p className="text-gray-300 text-sm mt-1">Up to 50% off on selected items</p>
           </div>
           
-          <a href="/sale" className="mt-4 md:mt-0 text-sm font-medium border-b border-white pb-1 hover:text-gray-300 transition-colors">
+          <a href="/sale" className="mt-2 md:mt-0 text-xs font-medium border-b border-white pb-1 hover:text-gray-300 transition-colors">
             View All Sale Items
           </a>
         </div>
@@ -136,10 +136,10 @@ const SaleCarousel = () => {
             >
               {saleProducts.map((product) => (
                 <div key={product.id} className="min-w-full flex-shrink-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                     {/* Product image */}
-                    <div className="relative rounded-lg overflow-hidden aspect-[4/3]">
-                      <div className="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-2 py-1 rounded">
+                    <div className="relative rounded-lg overflow-hidden aspect-[4/3] md:aspect-[16/9]">
+                      <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded">
                         {product.discount}% OFF
                       </div>
                       <img 
@@ -150,24 +150,24 @@ const SaleCarousel = () => {
                     </div>
                     
                     {/* Product details */}
-                    <div className="flex flex-col justify-center space-y-6">
+                    <div className="flex flex-col justify-center space-y-3">
                       <div>
-                        <p className="text-gray-300 mb-2">{product.category}</p>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-4">{product.name}</h3>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl md:text-2xl font-bold">{formatCurrency(product.salePrice)}</span>
-                          <span className="text-gray-400 line-through">{formatCurrency(product.originalPrice)}</span>
+                        <p className="text-gray-300 text-xs mb-1">{product.category}</p>
+                        <h3 className="text-xl md:text-2xl font-bold mb-2">{product.name}</h3>
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg md:text-xl font-bold">{formatCurrency(product.salePrice)}</span>
+                          <span className="text-gray-400 text-sm line-through">{formatCurrency(product.originalPrice)}</span>
                         </div>
                       </div>
                       
-                      <p className="text-gray-300">
+                      <p className="text-gray-300 text-sm hidden md:block">
                         Limited stock available. Get this style before it's gone!
                       </p>
                       
-                      <div className="pt-4">
+                      <div className="pt-2">
                         <Button 
                           onClick={() => handleAddToCart(product)}
-                          className="bg-white text-black hover:bg-gray-100 px-8 py-6 h-auto rounded-md"
+                          className="bg-white text-black hover:bg-gray-100 px-4 py-2 h-auto text-sm rounded-md"
                         >
                           Add to Cart
                         </Button>
@@ -182,27 +182,27 @@ const SaleCarousel = () => {
           {/* Navigation buttons */}
           <button 
             onClick={prevSlide}
-            className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition-colors"
+            className="absolute top-1/2 left-2 -translate-y-1/2 bg-black/60 text-white p-1 rounded-full hover:bg-black/80 transition-colors"
             aria-label="Previous slide"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} />
           </button>
           <button 
             onClick={nextSlide}
-            className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition-colors"
+            className="absolute top-1/2 right-2 -translate-y-1/2 bg-black/60 text-white p-1 rounded-full hover:bg-black/80 transition-colors"
             aria-label="Next slide"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} />
           </button>
           
           {/* Indicators */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-1.5 mt-4">
             {saleProducts.map((_, index) => (
               <button
                 key={index}
                 onClick={() => gotoSlide(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-colors",
+                  "w-2 h-2 rounded-full transition-colors",
                   index === currentIndex ? "bg-white" : "bg-white/30 hover:bg-white/50"
                 )}
                 aria-label={`Go to slide ${index + 1}`}
