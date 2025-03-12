@@ -5,6 +5,8 @@ import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import CheckoutForm from './CheckoutForm';
+import PaymentForm from './PaymentForm';
+import AuthModal from './AuthModal';
 
 type CheckoutStep = 'cart' | 'delivery' | 'payment';
 
@@ -30,40 +32,58 @@ const Cart = () => {
   
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('cart');
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetails | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Format currency
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(amount);
   };
 
   const handleCheckout = () => {
-    setCurrentStep('delivery');
+    if (isAuthenticated) {
+      setCurrentStep('delivery');
+    } else {
+      setIsAuthModalOpen(true);
+    }
   };
 
   const handleDeliverySubmit = (data: DeliveryDetails) => {
     setDeliveryDetails(data);
     setCurrentStep('payment');
-    // In a real app, you would proceed to payment processing
-    console.log('Delivery details:', data);
+  };
+
+  const handlePaymentSuccess = () => {
+    clearCart();
+    closeCart();
+    setCurrentStep('cart');
   };
 
   const goBackToCart = () => {
     setCurrentStep('cart');
   };
 
-  // This would be replaced with actual payment processing
-  const handlePaymentDummy = () => {
-    alert('Payment would be processed here. Order completed!');
-    clearCart();
-    closeCart();
-    setCurrentStep('cart');
+  const goBackToDelivery = () => {
+    setCurrentStep('delivery');
+  };
+
+  const handleAuthenticated = () => {
+    setIsAuthenticated(true);
+    setCurrentStep('delivery');
   };
 
   return (
     <>
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)}
+        onAuthenticated={handleAuthenticated}
+      />
+      
       {/* Backdrop */}
       {isOpen && (
         <div 
@@ -174,46 +194,11 @@ const Cart = () => {
             )}
 
             {currentStep === 'payment' && deliveryDetails && (
-              <div className="p-6 space-y-6">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium">Order Summary</h3>
-                  
-                  <div className="bg-gray-50 p-4 rounded-lg space-y-2">
-                    <p className="font-medium">Shipping to:</p>
-                    <p>{deliveryDetails.fullName}</p>
-                    <p>{deliveryDetails.address}</p>
-                    <p>{deliveryDetails.city}, {deliveryDetails.postalCode}</p>
-                    <p>Phone: {deliveryDetails.phone}</p>
-                    <p>Email: {deliveryDetails.email}</p>
-                  </div>
-                  
-                  <div className="border-t pt-4">
-                    <h4 className="font-medium mb-2">Items:</h4>
-                    {items.map((item) => (
-                      <div key={item.id} className="flex justify-between py-1">
-                        <span>{item.name} × {item.quantity}</span>
-                        <span>{formatCurrency(item.price * item.quantity)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="space-y-4 pt-4">
-                  <Button 
-                    onClick={handlePaymentDummy} 
-                    className="w-full bg-black hover:bg-black/80 text-white"
-                  >
-                    Complete Order
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setCurrentStep('delivery')} 
-                    className="w-full"
-                  >
-                    Back to Delivery Details
-                  </Button>
-                </div>
-              </div>
+              <PaymentForm 
+                amount={totalPrice}
+                onSuccess={handlePaymentSuccess}
+                onCancel={goBackToDelivery}
+              />
             )}
           </div>
           
@@ -224,7 +209,7 @@ const Cart = () => {
                 <p>Subtotal</p>
                 <p>{formatCurrency(totalPrice)}</p>
               </div>
-              <p className="text-sm text-muted-foreground">Shipping and taxes calculated at checkout</p>
+              <p className="text-sm text-muted-foreground">Free shipping on orders over ₹1,999</p>
               <div className="space-y-3">
                 <Button 
                   className="w-full bg-black hover:bg-black/80 text-white"
@@ -240,6 +225,9 @@ const Cart = () => {
                   Clear Cart
                 </Button>
               </div>
+              <p className="text-xs text-center text-muted-foreground mt-4">
+                By proceeding to checkout, you agree to our <Link href="/terms" className="underline">Terms & Conditions</Link> and <Link href="/refund-policy" className="underline">Refund Policy</Link>
+              </p>
             </div>
           )}
         </div>
@@ -247,5 +235,11 @@ const Cart = () => {
     </>
   );
 };
+
+const Link = ({ href, className, children }: { href: string, className?: string, children: React.ReactNode }) => (
+  <a href={href} className={className} onClick={(e) => e.stopPropagation()}>
+    {children}
+  </a>
+);
 
 export default Cart;

@@ -5,12 +5,14 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import Footer from '@/components/Footer';
 import SaleBanner from '@/components/SaleBanner';
 import CategorySection from '@/components/CategorySection';
+import SaleCarousel from '@/components/SaleCarousel';
 
 const Index = () => {
   return (
     <main className="antialiased">
       <SaleBanner />
       <Hero />
+      <SaleCarousel />
       <FeaturedProducts />
       
       <CategorySection

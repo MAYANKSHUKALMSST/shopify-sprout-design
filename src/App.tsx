@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 import { CartProvider } from "./context/CartContext";
+import TermsConditions from "./pages/TermsConditions";
+import RefundPolicy from "./pages/RefundPolicy";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Cart />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/terms" element={<TermsConditions />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
