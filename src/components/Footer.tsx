@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 mb-12">
           {/* Brand info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold">ZUREE DISEÑO</h3>
+            <h3 className="text-xl font-bold">ZUREE DISEÑO Pvt Ltd</h3>
             <p className="text-muted-foreground text-sm max-w-xs">
               A collection of thoughtfully designed clothing that brings style and comfort to everyday life.
             </p>
@@ -40,17 +40,31 @@ const Footer = () => {
           <div>
             <h3 className="font-medium mb-4">Contact</h3>
             <ul className="space-y-3">
-              <li className="text-sm text-muted-foreground flex">
-                <MapPin size={16} className="mr-2 flex-shrink-0 text-gray-500" />
-                <span>123 Design St, San Francisco, CA 94103</span>
+              <li className="text-sm text-muted-foreground flex items-start">
+                <MapPin size={16} className="mr-2 flex-shrink-0 text-gray-500 mt-0.5" />
+                <div>
+                  <p className="font-semibold mb-1">USA:</p>
+                  <p>2320 Ponce De Leon Blvd, Coral Gables, FL 33134</p>
+                </div>
               </li>
-              <li className="text-sm text-muted-foreground flex">
-                <Phone size={16} className="mr-2 flex-shrink-0 text-gray-500" />
-                <span>+1 (555) 123-4567</span>
+              <li className="text-sm text-muted-foreground flex items-start">
+                <MapPin size={16} className="mr-2 flex-shrink-0 text-gray-500 mt-0.5" />
+                <div>
+                  <p className="font-semibold mb-1">India:</p>
+                  <p>Plot no. 23, Udyog Vihar Phase 1, Dundahera Village, Sector 20, Gurugram, Haryana 122022</p>
+                </div>
               </li>
               <li className="text-sm text-muted-foreground flex">
                 <Mail size={16} className="mr-2 flex-shrink-0 text-gray-500" />
-                <span>hello@zuree.com</span>
+                <span>Contact@zuree.in</span>
+              </li>
+              <li className="text-sm text-muted-foreground flex">
+                <Phone size={16} className="mr-2 flex-shrink-0 text-gray-500" />
+                <span>+91 97114 11526</span>
+              </li>
+              <li className="text-sm text-muted-foreground flex">
+                <Phone size={16} className="mr-2 flex-shrink-0 text-gray-500" />
+                <span>+91 97113 08198</span>
               </li>
             </ul>
           </div>
@@ -83,7 +97,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="text-center pt-6 border-t border-gray-200 mt-6">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} ZUREE DISEÑO. All rights reserved.
+            © {currentYear} ZUREE DISEÑO Pvt Ltd. All rights reserved.
           </p>
         </div>
       </div>

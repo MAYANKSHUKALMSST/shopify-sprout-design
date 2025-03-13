@@ -27,32 +27,11 @@ const Hero = () => {
             </span>
           </motion.div>
           
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold leading-tight md:leading-tight tracking-tight mb-6"
-          >
-            The Art of <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-600">
-              Simple Living
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto"
-          >
-            Discover our collection of thoughtfully designed objects that bring beauty and purpose to everyday life.
-          </motion.p>
-          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mt-10"
           >
             <Button 
               className="group bg-black text-white hover:bg-black/90 px-8 py-6 rounded-md h-auto text-base"
