@@ -8,7 +8,10 @@ const urlsToCache = [
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
-  '/og-image.png'
+  '/og-image.png',
+  '/icons/icon-192x192.png',
+  '/icons/icon-384x384.png',
+  '/icons/icon-512x512.png'
 ];
 
 // Install event
@@ -16,6 +19,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
+        console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
@@ -68,4 +72,17 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+});
+
+// Handle offline fallback
+self.addEventListener('fetch', (event) => {
+  // Check if the request is for a page
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.match('/');
+        })
+    );
+  }
 });

@@ -20,9 +20,11 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
+  "theme_color": "#4F46E5",
   "background_color": "#ffffff",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "scope": "/",
+  "description": "Shop the latest fashion trends with our easy-to-use mobile app"
 }
