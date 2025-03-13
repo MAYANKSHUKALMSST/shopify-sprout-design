@@ -9,67 +9,67 @@ import { ArrowRight } from 'lucide-react';
 const products: Product[] = [
   {
     id: 1,
-    name: "Minimalist Ceramic Vase",
+    name: "Classic White Shirt",
     price: 48.99,
-    image: "https://images.unsplash.com/photo-1581794378943-5f6f3371ae1e?auto=format&fit=crop&q=80",
-    category: "Home Decor",
-    description: "A beautifully crafted ceramic vase with a minimalist design that complements any interior."
+    image: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?auto=format&fit=crop&q=80",
+    category: "Men's Clothing",
+    description: "A timeless white shirt made from premium cotton with a modern slim fit design."
   },
   {
     id: 2,
-    name: "Wooden Serving Tray",
-    price: 34.95,
-    image: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&q=80",
-    category: "Kitchen",
-    description: "Elegant wooden serving tray made from sustainable oak with smooth finish."
+    name: "Slim Fit Jeans",
+    price: 54.95,
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80",
+    category: "Men's Clothing",
+    description: "Comfortable slim fit jeans with a perfect balance of style and comfort."
   },
   {
     id: 3,
-    name: "Linen Throw Pillow",
-    price: 29.99,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80",
-    category: "Textiles",
-    description: "Soft linen throw pillow with removable cover in neutral tones."
+    name: "Linen Blend Blouse",
+    price: 39.99,
+    image: "https://images.unsplash.com/photo-1499939667766-4afceb292d05?auto=format&fit=crop&q=80",
+    category: "Women's Clothing",
+    description: "Elegant linen blend blouse with relaxed fit and breathable fabric."
   },
   {
     id: 4,
-    name: "Handcrafted Wall Clock",
+    name: "Printed Summer Dress",
     price: 68.50,
-    image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&q=80",
-    category: "Wall Decor",
-    description: "Modern wall clock with a clean design and silent quartz movement."
+    image: "https://images.unsplash.com/photo-1612336307429-8a898d10e223?auto=format&fit=crop&q=80",
+    category: "Women's Clothing",
+    description: "Light and breezy summer dress with a beautiful floral print pattern."
   },
   {
     id: 5,
-    name: "Glass Terrarium",
+    name: "Cotton Polo Shirt",
     price: 42.00,
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80", 
-    category: "Plants",
-    description: "Geometric glass terrarium for displaying your favorite small plants."
+    image: "https://images.unsplash.com/photo-1585412594838-e6079e48b5f2?auto=format&fit=crop&q=80", 
+    category: "Men's Clothing",
+    description: "Classic polo shirt made from premium cotton with a comfortable regular fit."
   },
   {
     id: 6,
-    name: "Marble Coaster Set",
-    price: 24.99,
-    image: "https://images.unsplash.com/photo-1588371847456-81f09e28491a?auto=format&fit=crop&q=80",
-    category: "Tableware",
-    description: "Set of four marble coasters with cork backing to protect your surfaces."
+    name: "Pleated Midi Skirt",
+    price: 44.99,
+    image: "https://images.unsplash.com/photo-1577900232427-18219b9166a0?auto=format&fit=crop&q=80",
+    category: "Women's Clothing",
+    description: "Elegant pleated midi skirt with a flattering silhouette and versatile design."
   },
   {
     id: 7,
-    name: "Woven Storage Basket",
-    price: 39.95,
-    image: "https://images.unsplash.com/photo-1537182534312-f945134cce34?auto=format&fit=crop&q=80",
-    category: "Storage",
-    description: "Handwoven storage basket perfect for organizing any room in your home."
+    name: "Lightweight Cardigan",
+    price: 49.95,
+    image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&q=80",
+    category: "Women's Clothing",
+    description: "Soft and lightweight cardigan perfect for layering in any season."
   },
   {
     id: 8,
-    name: "Nordic Table Lamp",
+    name: "Tailored Blazer",
     price: 79.00,
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80",
-    category: "Lighting",
-    description: "Scandinavian-inspired table lamp with wooden base and linen shade."
+    image: "https://images.unsplash.com/photo-1517614138969-67d1892d0edf?auto=format&fit=crop&q=80",
+    category: "Men's Clothing",
+    description: "Sophisticated tailored blazer that transitions easily from office to evening."
   }
 ];
 
@@ -87,7 +87,7 @@ const FeaturedProducts = () => {
             >
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Featured Products</h2>
               <p className="mt-4 text-muted-foreground max-w-2xl">
-                Explore our curated collection of thoughtfully designed products for your home.
+                Explore our curated collection of thoughtfully designed clothing for your wardrobe.
               </p>
             </motion.div>
           </div>
