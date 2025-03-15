@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import ProductEditor from '@/components/ProductEditor';
-import { LogOut } from 'lucide-react';
+import { LogOut, Plus, Trash } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
 // Mock products for demo (in a real app, this would come from an API/database)
 const mockProducts = [
@@ -42,9 +43,22 @@ const mockProducts = [
   },
 ];
 
+// Empty product template for new products
+const emptyProduct = {
+  id: '',
+  name: '',
+  price: 0,
+  category: 'Men\'s Essentials',
+  image: 'https://images.unsplash.com/photo-1561876029-3ca8a45d96ce?auto=format&fit=crop&q=80',
+  description: ''
+};
+
 const AdminDashboard = () => {
   const [products, setProducts] = useState(mockProducts);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isCreating, setIsCreating] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<any>(null);
   const navigate = useNavigate();
 
   // Check if admin is authenticated
@@ -69,6 +83,36 @@ const AdminDashboard = () => {
     toast.success('Product updated successfully');
   };
 
+  const handleCreateProduct = () => {
+    setIsCreating(true);
+    const newProductTemplate = {
+      ...emptyProduct,
+      id: Date.now().toString() // Generate a temporary ID
+    };
+    setSelectedProduct(newProductTemplate);
+  };
+
+  const handleSaveNewProduct = (newProduct: any) => {
+    setProducts([...products, newProduct]);
+    setSelectedProduct(null);
+    setIsCreating(false);
+    toast.success('Product added successfully');
+  };
+
+  const handleDeleteClick = (product: any) => {
+    setProductToDelete(product);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      setProducts(products.filter(p => p.id !== productToDelete.id));
+      setDeleteDialogOpen(false);
+      setProductToDelete(null);
+      toast.success('Product deleted successfully');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       <header className="bg-white shadow">
@@ -86,52 +130,107 @@ const AdminDashboard = () => {
           <div>
             <Button 
               variant="outline" 
-              onClick={() => setSelectedProduct(null)}
+              onClick={() => {
+                setSelectedProduct(null);
+                setIsCreating(false);
+              }}
               className="mb-4"
             >
               Back to Products
             </Button>
             <ProductEditor 
               product={selectedProduct} 
-              onSave={handleProductUpdate}
-              onCancel={() => setSelectedProduct(null)}
+              onSave={isCreating ? handleSaveNewProduct : handleProductUpdate}
+              onCancel={() => {
+                setSelectedProduct(null);
+                setIsCreating(false);
+              }}
             />
           </div>
         ) : (
           <div>
-            <h2 className="text-xl font-semibold mb-4">Product Management</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Product Management</h2>
+              <Button 
+                onClick={handleCreateProduct}
+                className="bg-black hover:bg-black/80 text-white flex items-center gap-2"
+              >
+                <Plus size={16} />
+                Add New Product
+              </Button>
+            </div>
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
-              <ul className="divide-y divide-gray-200">
-                {products.map(product => (
-                  <li key={product.id}>
-                    <div className="px-4 py-4 sm:px-6 flex items-center justify-between hover:bg-gray-50">
-                      <div className="flex items-center">
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="h-16 w-16 object-cover rounded"
-                        />
-                        <div className="ml-4">
-                          <h3 className="text-sm font-medium">{product.name}</h3>
-                          <p className="text-sm text-gray-500">${product.price}</p>
-                          <p className="text-xs text-gray-400">{product.category}</p>
+              {products.length === 0 ? (
+                <div className="p-6 text-center text-gray-500">
+                  No products available. Click "Add New Product" to create one.
+                </div>
+              ) : (
+                <ul className="divide-y divide-gray-200">
+                  {products.map(product => (
+                    <li key={product.id}>
+                      <div className="px-4 py-4 sm:px-6 flex items-center justify-between hover:bg-gray-50">
+                        <div className="flex items-center">
+                          <img 
+                            src={product.image} 
+                            alt={product.name} 
+                            className="h-16 w-16 object-cover rounded"
+                          />
+                          <div className="ml-4">
+                            <h3 className="text-sm font-medium">{product.name}</h3>
+                            <p className="text-sm text-gray-500">${product.price}</p>
+                            <p className="text-xs text-gray-400">{product.category}</p>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => setSelectedProduct(product)}
+                          >
+                            Edit
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            onClick={() => handleDeleteClick(product)}
+                          >
+                            <Trash size={16} />
+                          </Button>
                         </div>
                       </div>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => setSelectedProduct(product)}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         )}
       </main>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Product</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete "{productToDelete?.name}"? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmDelete}
+              className="bg-red-500 hover:bg-red-600 text-white"
+            >
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

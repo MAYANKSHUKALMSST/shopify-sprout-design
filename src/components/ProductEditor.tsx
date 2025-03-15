@@ -22,6 +22,7 @@ interface ProductEditorProps {
 const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel }) => {
   const [editedProduct, setEditedProduct] = useState({ ...product });
   const [imagePreview, setImagePreview] = useState(product.image);
+  const isNewProduct = !product.name; // Check if this is a new product
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -59,7 +60,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-6">Edit Product</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        {isNewProduct ? "Add New Product" : "Edit Product"}
+      </h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -73,6 +76,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
               value={editedProduct.name}
               onChange={handleChange}
               required
+              placeholder="Enter product name"
             />
           </div>
           
@@ -89,6 +93,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
               value={editedProduct.price}
               onChange={handlePriceChange}
               required
+              placeholder="0.00"
             />
           </div>
           
@@ -157,6 +162,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
             rows={4}
             value={editedProduct.description}
             onChange={handleChange}
+            placeholder="Enter product description"
           />
         </div>
         
@@ -166,7 +172,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
           </Button>
           <Button type="submit" className="bg-black hover:bg-black/80 text-white flex items-center">
             <Save className="mr-2 h-4 w-4" />
-            Save Changes
+            {isNewProduct ? "Add Product" : "Save Changes"}
           </Button>
         </div>
       </form>
