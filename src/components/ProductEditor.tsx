@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Save, UploadCloud } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 interface ProductEditorProps {
   product: {
@@ -22,7 +23,7 @@ interface ProductEditorProps {
 const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel }) => {
   const [editedProduct, setEditedProduct] = useState({ ...product });
   const [imagePreview, setImagePreview] = useState(product.image);
-  const isNewProduct = !product.name; // Check if this is a new product
+  const isNewProduct = !product.name || product.name === ''; // Check if this is a new product
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -67,9 +68,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <Label htmlFor="name" className="mb-1">
               Product Name
-            </label>
+            </Label>
             <Input
               id="name"
               name="name"
@@ -81,9 +82,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
           </div>
           
           <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
+            <Label htmlFor="price" className="mb-1">
               Price ($)
-            </label>
+            </Label>
             <Input
               id="price"
               name="price"
@@ -98,9 +99,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
           </div>
           
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+            <Label htmlFor="category" className="mb-1">
               Category
-            </label>
+            </Label>
             <Select
               value={editedProduct.category}
               onValueChange={handleCategoryChange}
@@ -119,9 +120,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
           </div>
           
           <div>
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+            <Label htmlFor="image" className="mb-1">
               Product Image
-            </label>
+            </Label>
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Input
@@ -153,9 +154,9 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
         </div>
         
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+          <Label htmlFor="description" className="mb-1">
             Description
-          </label>
+          </Label>
           <Textarea
             id="description"
             name="description"
