@@ -11,6 +11,9 @@ import Cart from "./components/Cart";
 import { CartProvider } from "./context/CartContext";
 import TermsConditions from "./pages/TermsConditions";
 import RefundPolicy from "./pages/RefundPolicy";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -21,14 +24,31 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Navbar />
-          <Cart />
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/terms" element={<TermsConditions />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+            {/* Admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              } 
+            />
+            
+            {/* Public routes with navbar and cart */}
+            <Route path="*" element={
+              <>
+                <Navbar />
+                <Cart />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/terms" element={<TermsConditions />} />
+                  <Route path="/refund-policy" element={<RefundPolicy />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </>
+            } />
           </Routes>
         </BrowserRouter>
       </CartProvider>
