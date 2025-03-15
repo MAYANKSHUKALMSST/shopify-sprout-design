@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Save, UploadCloud } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface ProductEditorProps {
   product: {
@@ -21,24 +23,25 @@ interface ProductEditorProps {
 }
 
 const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel }) => {
-  const [editedProduct, setEditedProduct] = useState({ ...product });
   const [imagePreview, setImagePreview] = useState(product.image);
   const isNewProduct = !product.name || product.name === ''; // Check if this is a new product
+  
+  const { 
+    register, 
+    handleSubmit, 
+    setValue, 
+    formState: { errors },
+    watch 
+  } = useForm({
+    defaultValues: {
+      ...product
+    }
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setEditedProduct({ ...editedProduct, [name]: value });
-  };
-
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setEditedProduct({ ...editedProduct, price: isNaN(value) ? 0 : value });
-  };
-
-  const handleCategoryChange = (value: string) => {
-    setEditedProduct({ ...editedProduct, category: value });
-  };
-
+  // Watch for changes to category field
+  const watchedCategory = watch('category');
+  
+  // Handle image selection
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -48,15 +51,20 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
       reader.onload = () => {
         const result = reader.result as string;
         setImagePreview(result);
-        setEditedProduct({ ...editedProduct, image: result });
+        setValue('image', result);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave(editedProduct);
+  // Handle category selection
+  const handleCategoryChange = (value: string) => {
+    setValue('category', value);
+  };
+
+  // Form submission
+  const onSubmit = (data: any) => {
+    onSave(data);
   };
 
   return (
@@ -65,7 +73,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
         {isNewProduct ? "Add New Product" : "Edit Product"}
       </h2>
       
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <Label htmlFor="name" className="mb-1">
@@ -73,12 +81,14 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
             </Label>
             <Input
               id="name"
-              name="name"
-              value={editedProduct.name}
-              onChange={handleChange}
-              required
+              {...register('name', { 
+                required: 'Product name is required' 
+              })}
               placeholder="Enter product name"
             />
+            {errors.name && (
+              <p className="text-sm text-red-500 mt-1">{errors.name.message?.toString()}</p>
+            )}
           </div>
           
           <div>
@@ -87,15 +97,22 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
             </Label>
             <Input
               id="price"
-              name="price"
               type="number"
               step="0.01"
               min="0"
-              value={editedProduct.price}
-              onChange={handlePriceChange}
-              required
+              {...register('price', { 
+                required: 'Price is required',
+                min: {
+                  value: 0,
+                  message: 'Price must be a positive number'
+                },
+                valueAsNumber: true
+              })}
               placeholder="0.00"
             />
+            {errors.price && (
+              <p className="text-sm text-red-500 mt-1">{errors.price.message?.toString()}</p>
+            )}
           </div>
           
           <div>
@@ -103,7 +120,7 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
               Category
             </Label>
             <Select
-              value={editedProduct.category}
+              value={watchedCategory}
               onValueChange={handleCategoryChange}
             >
               <SelectTrigger>
@@ -159,13 +176,19 @@ const ProductEditor: React.FC<ProductEditorProps> = ({ product, onSave, onCancel
           </Label>
           <Textarea
             id="description"
-            name="description"
+            {...register('description')}
             rows={4}
-            value={editedProduct.description}
-            onChange={handleChange}
             placeholder="Enter product description"
           />
         </div>
+        
+        {(errors.name || errors.price) && (
+          <Alert variant="destructive" className="bg-red-50 border-red-200 text-red-800">
+            <AlertDescription>
+              Please fix the errors above before submitting
+            </AlertDescription>
+          </Alert>
+        )}
         
         <div className="flex justify-end space-x-3">
           <Button type="button" variant="outline" onClick={onCancel}>
